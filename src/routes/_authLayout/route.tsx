@@ -1,0 +1,37 @@
+import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
+import { GalleryVerticalEnd } from "lucide-react";
+
+export const Route = createFileRoute("/_authLayout")({
+	component: RouteComponent,
+});
+
+function RouteComponent() {
+	return (
+		<div className="grid min-h-svh lg:grid-cols-3">
+			<div className="flex flex-col gap-4 p-6 md:p-10 col-span-2">
+				<div className="flex justify-center gap-2 md:justify-start">
+					<Link to="/" className="flex items-center gap-2 font-medium">
+						<div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
+							<GalleryVerticalEnd className="size-4" />
+						</div>
+						Flowcat Inc.
+					</Link>
+				</div>
+				<div className="flex flex-1 items-center justify-center">
+					<div className="w-full max-w-xs">
+						<Outlet />
+					</div>
+				</div>
+			</div>
+			<div className="bg-primary/5 relative  p-10 hidden lg:block">
+				<div className="absolute top-11/12">
+					<blockquote className="leading-normal text-balance text-primary">
+						&ldquo;This library has saved me countless hours of work and helped
+						me deliver stunning designs to my clients faster than ever
+						before.&rdquo; - Sofia Davis
+					</blockquote>
+				</div>
+			</div>
+		</div>
+	);
+}
