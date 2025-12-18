@@ -18,17 +18,18 @@ function RouteComponent() {
 					</Link>
 				</div>
 				<div className="flex flex-1 items-center justify-center">
-					<div className="w-full max-w-xs">
+					<div className="w-full max-w-sm">
 						<Outlet />
 					</div>
 				</div>
 			</div>
-			<div className="bg-primary/5 relative  p-10 hidden lg:block">
-				<div className="absolute top-11/12">
+			<div className="bg-primary/5 relative p-10 hidden lg:block">
+				<div className="absolute bottom-5">
 					<blockquote className="leading-normal text-balance text-primary">
-						&ldquo;This library has saved me countless hours of work and helped
-						me deliver stunning designs to my clients faster than ever
-						before.&rdquo; - Sofia Davis
+						&ldquo;The way this product streamline the whole process from
+						fetching the gig's in realtime like they are synced with each other
+						to the prompt generation is truly unbelieveable.&rdquo; -{" "}
+						<span className="font-semibold ">Sofia Davis</span>
 					</blockquote>
 				</div>
 			</div>
