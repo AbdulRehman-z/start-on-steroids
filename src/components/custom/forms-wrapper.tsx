@@ -16,11 +16,7 @@ export const FormWrapper = ({ title, children, className }: Props) => {
 				</span>
 			)}
 			<div
-				className={cn(
-					"border border-dashed p-7",
-					title ?? "relative",
-					className,
-				)}
+				className={cn("border border-dashed border-spacing-20 p-7", className)}
 			>
 				{children}
 			</div>

@@ -5,6 +5,8 @@ export const env = createEnv({
   server: {
     DB_URL: z.string(),
     NODE_ENV: z.string().default("development"),
+    GITHUB_SECRET: z.string().min(1),
+    GOOGLE_SECRET: z.string().min(1),
   },
 
   /**
@@ -14,7 +16,9 @@ export const env = createEnv({
   clientPrefix: "VITE_",
 
   client: {
-    VITE_APP_TITLE: z.string().min(1).optional(),
+    VITE_GITHUB_CLIENT_ID: z.string().min(1),
+    VITE_GOOGLE_CLIENT_ID: z.string().min(1),
+    VITE_BETTER_AUTH_URL: z.string().min(1).optional(),
   },
 
   /**

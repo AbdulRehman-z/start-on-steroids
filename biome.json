@@ -25,6 +25,7 @@
     "enabled": true,
     "rules": {
       "correctness": {
+        "noChildrenProp": "off",
         "useUniqueElementIds": "off"
       },
       "recommended": true
