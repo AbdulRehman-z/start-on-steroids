@@ -7,7 +7,7 @@ export const Testimonial = () => {
 					is so intuitive and well-designed, making our daily tasks much more
 					efficient.&rdquo;
 					<br />
-					<span className="font-semibold">Sofia Davis</span>
+					<span className="font-semibold">Abdul Rehman</span>
 				</blockquote>
 			</div>
 		</div>
