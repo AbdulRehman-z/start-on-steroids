@@ -1,60 +1,120 @@
 # Contributing to Start on Steroids
 
-Thanks for taking the time to contribute! ❤️ Every bit of help—from fixing bugs to sharing the project—is appreciated.
+Thank you for considering contributing! This guide will help you understand how to contribute effectively.
 
-> **Not a coder?** You can still support us by:
-> - Starring the repo
-> - Tweeting about the project
-> - Mentioning us in your project's README or at meetups
+## 🚀 Quick Start
 
-## Table of Contents
+1. **Fork the repository** on GitHub
+2. **Clone your fork** locally:
+   ```bash
+   git clone https://github.com/YOUR-USERNAME/start-on-steroids.git
+   cd start-on-steroids
+   ```
+3. **Install dependencies**:
+   ```bash
+   bun install
+   ```
+4. **Create a branch** for your changes:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
 
-- [Code of Conduct](#code-of-conduct)
-- [I Have a Question](#i-have-a-question)
-- [I Want To Contribute](#i-want-to-contribute)
-  - [Reporting Bugs](#reporting-bugs)
-  - [Suggesting Enhancements](#suggesting-enhancements)
-  - [Your First Code Contribution](#your-first-code-contribution)
-- [Styleguides](#styleguides)
-
-## Code of Conduct
-
-This project follows our [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you agree to uphold these standards. Please report any unacceptable behavior.
-
-## I Have a Question
-
-Please check the [Documentation](README.md) and search existing [Issues](https://github.com/AbdulRehman-z/start-on-steroids/issues) before asking.
-
-If you're still stuck:
-- Open a new [Issue](https://github.com/AbdulRehman-z/start-on-steroids/issues).
-- Provide context and your environment details (Node.js version, OS, etc.).
-
-## I Want To Contribute
+## 📝 How to Contribute
 
 ### Reporting Bugs
+Found a bug? Please open an issue with:
+- A clear title describing the problem
+- Steps to reproduce the bug if possible
+- Expected vs actual behavior
+- Your environment (OS, Node version, etc.)
 
-1. **Check for updates:** Ensure you are using the latest version.
-2. **Search first:** Check the [bug tracker](https://github.com/AbdulRehman-z/start-on-steroids/issues) to see if the issue is already known.
-3. **Open an issue:** Describe what happened vs. what you expected, and include clear steps to reproduce the bug. Mention your OS and environment info.
+### Suggesting Features
+Have an idea? Open an issue with:
+- A clear description of the feature
+- Why it would be useful
+- Examples of how it would work
 
-### Suggesting Enhancements
+### Submitting Code
 
-Have an idea? I'd love to hear it!
-1. Search [existing issues](https://github.com/AbdulRehman-z/start-on-steroids/issues) to avoid duplicates.
-2. Open a new issue with a clear title.
-3. Explain the "what" and the "why"—how would this benefit most users?
+#### Before You Start
+- Check existing issues and PRs to avoid duplicates
+- Discuss major changes in an issue first
+- Keep changes focused on a single feature/fix
 
-### Your First Code Contribution
+#### Making Changes
+1. Write clean, readable code
+2. Follow the existing code style (I use Biome)
+3. Test your changes locally:
+   ```bash
+   bun run dev
+   bun run lint
+   ```
+4. Commit with clear messages:
+   ```bash
+   git commit -m "feat: add new authentication method"
+   ```
 
-1. Set up your environment using the [Installation](README.md#installation) guide.
-2. Create a new branch for your feature or fix.
-3. Before committing, ensure your code is ready by running `bun run format` and `bun run lint`.
+#### Submitting a Pull Request
+1. **Push your changes** to your fork:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+2. **Open a Pull Request** on GitHub with:
+   - A clear title (e.g., "feat: add email verification")
+   - Description of what changed and why
+   - Link to related issues if any (e.g., "Closes #123")
+   - Screenshots (optional but recommended) if UI changes are involved
 
-## Styleguides
+3. **Wait for review** - I'll review your PR as soon as possible
+4. **Make requested changes** if needed
+5. Once approved, I'll merge your PR!
 
-### Commit Messages
+## ✅ Pull Request Checklist
 
-I use [Conventional Commits](https://www.conventionalcommits.org/):
-- `feat: add new auth provider`
-- `fix: resolve login bug`
-- `docs: update readme`
+Before submitting, make sure:
+- [ ] Code runs without errors
+- [ ] Tests pass (`bun run test`)
+- [ ] Code is linted (`bun run lint`)
+- [ ] Commits have clear messages
+- [ ] PR description explains the changes
+- [ ] Documentation is updated if needed
+
+## 🎯 Commit Message Guidelines
+
+Use conventional commits format:
+- `feat:` for new features
+- `fix:` for bug fixes
+- `docs:` for documentation changes
+- `style:` for formatting changes
+- `refactor:` for code refactoring
+- `test:` for adding tests
+- `chore:` for maintenance tasks
+
+Example: `feat: add password reset functionality`
+
+## 🔍 Review Process
+
+1. **I review all PRs** - Usually within 2-3 days
+2. **Feedback given** - I'll suggest changes or approve
+3. **You make updates** - Address any requested changes
+4. **Final approval** - Once everything looks good
+5. **Merge** - I'll merge your contribution!
+
+## 💡 Development Tips
+
+- Run `bun run dev` to start the dev server
+- Use `bun run db:studio` to view/manage the database
+- Check `package.json` for all available scripts
+- Ask questions in issues if you're stuck!
+
+## 🤝 Code of Conduct
+
+Please be respectful and inclusive. See our [Code of Conduct](CODE_OF_CONDUCT.md) for details.
+
+## ❓ Need Help?
+
+- Open an issue with the `question` label
+- Reach out in discussions
+- Check existing documentation
+
+Thank you for contributing! 🎉
