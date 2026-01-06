@@ -54,6 +54,27 @@ export const updateProfileSchema = z.object({
 		.max(100, { error: "Image URL must be less than 100 characters" }),
 });
 
+export const changeEmailSchema = z
+	.object({
+		email: emailSchema,
+		confirmEmail: emailSchema,
+	})
+	.refine((data) => data.email === data.confirmEmail, {
+		message: "Emails do not match",
+		path: ["confirmEmail"],
+	});
+
+export const changePasswordSchema = z
+	.object({
+		currentPassword: passwordSchema,
+		newPassword: passwordSchema,
+		confirmPassword: z.string().min(1, "Please confirm your password"),
+	})
+	.refine((data) => data.newPassword === data.confirmPassword, {
+		message: "New passwords do not match",
+		path: ["confirmPassword"],
+	});
+
 export type LoginFormData = z.infer<typeof loginSchema>;
 export type SignupFormData = z.infer<typeof signupSchema>;
 export type ForgotPasswordFormData = z.infer<typeof forgotPasswordSchema>;

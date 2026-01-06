@@ -1,24 +1,49 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { lastLoginMethod } from "better-auth/plugins";
+import { lastLoginMethod, twoFactor } from "better-auth/plugins";
 import { tanstackStartCookies } from "better-auth/tanstack-start";
 import { db } from "@/db";
 import * as authSchema from "@/db/schemas/auth-schema";
 import { env } from "@/env";
 import {
+	sendChangeEmailVerificationEmailTrigger,
+	sendDeleteAccountVerificationEmailTrigger,
 	sendPasswordResetEmailTrigger,
 	sendVerificationEmailTrigger,
 } from "./triggers";
-
-const isTargetRoute = (url: string) => {
-	return url.endsWith("/sign-in/email") || url.endsWith("/sign-up/email");
-};
 
 export const auth = betterAuth({
 	database: drizzleAdapter(db, {
 		provider: "pg",
 		schema: authSchema,
 	}),
+	user: {
+		deleteUser: {
+			enabled: true,
+			sendDeleteAccountVerification: async ({ user, url }) => {
+				void sendDeleteAccountVerificationEmailTrigger(
+					{
+						email: user.email,
+						name: user.name,
+					},
+					url,
+				);
+			},
+		},
+		changeEmail: {
+			enabled: true,
+			sendChangeEmailConfirmation: async ({ newEmail, url, user }) => {
+				void sendChangeEmailVerificationEmailTrigger(
+					{
+						email: user.email,
+						name: user.name,
+					},
+					newEmail,
+					url,
+				);
+			},
+		},
+	},
 	emailAndPassword: {
 		enabled: true,
 		autoSignIn: false,
@@ -29,13 +54,10 @@ export const auth = betterAuth({
 				url,
 			);
 		},
-		onPasswordReset: async ({ user }) => {
-			console.log(`Password reset for user ${user.id}`);
-		},
 	},
 	emailVerification: {
 		afterEmailVerification: async (user) => {
-			console.log(`Email verified for user ${user.id}`);
+			// TODO: send user welcome email
 		},
 		autoSignInAfterVerification: true,
 		sendOnSignIn: true,
@@ -47,11 +69,11 @@ export const auth = betterAuth({
 			);
 		},
 	},
-	session: {
-		cookieCache: {
-			enabled: true,
-		},
-	},
+	// session: {
+	// 	cookieCache: {
+	// 		enabled: true,
+	// 	},
+	// },
 	rateLimit: {
 		enabled: true,
 		storage: "database",
@@ -67,23 +89,21 @@ export const auth = betterAuth({
 		github: {
 			clientId: env.VITE_GITHUB_CLIENT_ID,
 			clientSecret: env.GITHUB_SECRET,
+			scope: ["user:image"],
 		},
 		google: {
 			clientId: env.VITE_GOOGLE_CLIENT_ID,
 			clientSecret: env.GOOGLE_SECRET,
 			scope: ["profile", "email"],
 			mapProfileToUser: async (profile) => {
-				console.log({ profile });
 				return {
-					name: "dawd9921e821geaoisv",
 					image: profile.picture,
 				};
 			},
 		},
 	},
-	user: {},
 	experimental: {
 		joins: true,
 	},
-	plugins: [tanstackStartCookies(), lastLoginMethod()],
+	plugins: [tanstackStartCookies(), lastLoginMethod(), twoFactor()],
 });

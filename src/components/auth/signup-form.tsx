@@ -231,7 +231,7 @@ export const SignupForm = () => {
 								<Field>
 									<SocialAuthButtons
 										disabled={isSubmitting}
-										callbackURL="/account"
+										callbackURL="/profile"
 										onAuthStart={() => setSocialAuthPending(true)}
 									/>
 

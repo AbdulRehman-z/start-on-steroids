@@ -1,16 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Suspense } from "react";
+import { ProfileDetailsContainer } from "@/components/auth/profile-details";
 import { GenericLoader } from "@/components/custom/generic-loader";
-import { SessionsContainer } from "@/components/sessions/sessions-container";
-import { getUserSessionsFn } from "@/functions/get-user-sessions-fn";
+import { getUserDetailsFn } from "@/functions/get-user-details-fn";
 
-export const Route = createFileRoute("/_protected/sessions/")({
+export const Route = createFileRoute("/_protected/profile/")({
 	loader: async ({ context }) => {
-		const { queryClient } = context;
-		void queryClient.prefetchQuery({
-			staleTime: 1000 * 60 * 10,
-			queryKey: ["user-sessions"],
-			queryFn: getUserSessionsFn,
+		void context.queryClient.prefetchQuery({
+			staleTime: 1000 * 60 * 5, // means 5 minutes
+			queryKey: ["user-details"],
+			queryFn: getUserDetailsFn,
 		});
 	},
 	component: RouteComponent,
@@ -22,22 +21,22 @@ function RouteComponent() {
 			<div className="flex flex-col min-h-full p-8">
 				<header className="border-b pb-8">
 					<h1 className="font-bold text-4xl uppercase tracking-tighter">
-						Sessions
+						Profile
 					</h1>
 					<p className="mt-2 text-muted-foreground font-mono">
-						Manage your sessions across all devices from one centralized place.
+						Manage your profile information and account settings
 					</p>
 				</header>
 				<div className="flex-1 py-8 flex flex-col">
 					<Suspense
 						fallback={
 							<GenericLoader
-								title="Loading Sessions"
-								description="Waiting for sessions to load! Hold on..."
+								title="Loading Profile"
+								description="Waiting for your profile details..."
 							/>
 						}
 					>
-						<SessionsContainer />
+						<ProfileDetailsContainer />
 					</Suspense>
 				</div>
 			</div>

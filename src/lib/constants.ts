@@ -1,21 +1,16 @@
 import {
 	KeyIcon,
 	Link2Icon,
-	ShieldIcon,
 	Trash2Icon,
+	TriangleAlertIcon,
 	UserIcon,
 } from "lucide-react";
 
 export const menuItems = [
 	{
-		title: "Account",
-		path: "/account",
+		title: "Profile",
+		path: "/profile",
 		icon: UserIcon,
-	},
-	{
-		title: "Security",
-		path: "/security",
-		icon: ShieldIcon,
 	},
 	{
 		title: "Sessions",
@@ -30,6 +25,6 @@ export const menuItems = [
 	{
 		title: "Danger",
 		path: "/danger",
-		icon: Trash2Icon,
+		icon: TriangleAlertIcon,
 	},
 ];

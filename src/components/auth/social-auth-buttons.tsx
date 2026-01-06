@@ -6,7 +6,7 @@ import { authClient } from "@/lib/auth-client";
 import { Badge } from "../ui/badge";
 import { Spinner } from "../ui/spinner";
 
-type SocialProvider = "github" | "google";
+export type SupportedSocialProvider = "github" | "google";
 type AllRoutes = LinkProps<RegisteredRouter>["to"];
 
 type SocialAuthButtonsProps = {
@@ -19,22 +19,24 @@ type SocialAuthButtonsProps = {
 	lastLoginMethod?: ReturnType<typeof authClient.getLastUsedLoginMethod>;
 };
 
-type ProviderConfig = {
-	name: string;
+export type ProviderConfig = {
 	icon: string;
 	label: string;
+	description?: string;
 };
 
-const PROVIDERS: Record<SocialProvider, ProviderConfig> = {
+export const PROVIDERS_CONFIG: Record<SupportedSocialProvider, ProviderConfig> =
+{
 	google: {
-		name: "Google",
+		label: "Google",
 		icon: "/google.svg",
-		label: "Continue with Google",
+		description:
+			"Connect to your Google account for easy sign-in and email integration.",
 	},
 	github: {
-		name: "GitHub",
+		label: "GitHub",
 		icon: "/github.svg",
-		label: "Continue with GitHub",
+		description: "Connect to your GitHub account.",
 	},
 };
 
@@ -44,11 +46,10 @@ export const SocialAuthButtons = ({
 	onAuthStart,
 	lastLoginMethod,
 }: SocialAuthButtonsProps) => {
-	const [loadingProvider, setLoadingProvider] = useState<SocialProvider | null>(
-		null,
-	);
+	const [loadingProvider, setLoadingProvider] =
+		useState<SupportedSocialProvider | null>(null);
 
-	const handleSocialAuth = async (provider: SocialProvider) => {
+	const handleSocialAuth = async (provider: SupportedSocialProvider) => {
 		// Set the current provider as loading
 		setLoadingProvider(provider);
 
@@ -66,36 +67,39 @@ export const SocialAuthButtons = ({
 
 	return (
 		<div className="flex flex-col gap-2">
-			{(Object.keys(PROVIDERS) as SocialProvider[]).map((provider) => {
-				const config = PROVIDERS[provider];
-				const isLoading = loadingProvider === provider;
-				const isDisabled = disabled || loadingProvider !== null;
+			{(Object.keys(PROVIDERS_CONFIG) as SupportedSocialProvider[]).map(
+				(provider) => {
+					const config = PROVIDERS_CONFIG[provider];
+					const isLoading = loadingProvider === provider;
+					const isDisabled = disabled || loadingProvider !== null;
 
-				return (
-					<Button
-						key={provider}
-						variant="outline"
-						type="button"
-						className="w-full relative"
-						disabled={isDisabled}
-						onClick={() => handleSocialAuth(provider)}
-					>
-						{isLoading && <Spinner />}
-						<Image
-							src={config.icon}
-							height={15}
-							width={15}
-							alt={`${config.name} logo`}
-						/>
-						{config.label}
-						{provider === lastLoginMethod && (
-							<Badge className="absolute -right-0.5 top-2/12 -translate-y-1/2 text-[10px]">
-								Last Used
-							</Badge>
-						)}
-					</Button>
-				);
-			})}
+					return (
+						<Button
+							key={provider}
+							variant="outline"
+							type="button"
+							className="w-full relative"
+							disabled={isDisabled}
+							onClick={() => handleSocialAuth(provider)}
+						>
+							{isLoading && <Spinner className="mr-2" />}
+							<Image
+								src={config.icon}
+								height={15}
+								width={15}
+								alt={`${config.label} logo`}
+								className={provider === "github" ? "dark:invert" : ""}
+							/>
+							Continue with {config.label}
+							{provider === lastLoginMethod && (
+								<Badge className="absolute -right-0.5 top-2/12 -translate-y-1/2 text-[10px]">
+									Last Used
+								</Badge>
+							)}
+						</Button>
+					);
+				},
+			)}
 		</div>
 	);
 };

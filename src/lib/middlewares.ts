@@ -31,7 +31,7 @@ export const requireNoAuthMiddleware = createMiddleware().server(
 		const session = await auth.api.getSession({ headers });
 
 		if (session) {
-			throw redirect({ to: "/account" });
+			throw redirect({ to: "/profile" });
 		}
 
 		return await next();

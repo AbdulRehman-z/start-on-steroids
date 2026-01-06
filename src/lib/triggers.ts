@@ -16,6 +16,22 @@ export const sendVerificationEmailTrigger = async (
 	});
 };
 
+export const sendDeleteAccountVerificationEmailTrigger = async (
+	user: { email: string; name: string },
+	url: string,
+) => {
+	void upstashClient.trigger({
+		url: `http://localhost:3000/api/send-delete-account-verification-email`,
+		body: JSON.stringify({
+			user: { email: user.email, name: user.name },
+			url,
+		}),
+		retries: 2,
+		retryDelay: "(1 + retried) * 1000",
+		keepTriggerConfig: true,
+	});
+};
+
 export const sendPasswordResetEmailTrigger = async (
 	user: { email: string; name: string },
 	url: string,
@@ -24,6 +40,24 @@ export const sendPasswordResetEmailTrigger = async (
 		url: `http://localhost:3000/api/send-password-reset-email`,
 		body: JSON.stringify({
 			user: { email: user.email, name: user.name },
+			url,
+		}),
+		retryDelay: "(1 + retried) * 1000",
+		retries: 2,
+		keepTriggerConfig: true,
+	});
+};
+
+export const sendChangeEmailVerificationEmailTrigger = async (
+	user: { email: string; name: string },
+	newEmail: string,
+	url: string,
+) => {
+	void upstashClient.trigger({
+		url: `http://localhost:3000/api/send-email-change`,
+		body: JSON.stringify({
+			user: { email: user.email, name: user.name },
+			newEmail,
 			url,
 		}),
 		retryDelay: "(1 + retried) * 1000",

@@ -51,7 +51,7 @@ export const LoginForm = () => {
 				},
 				{
 					onSuccess: () => {
-						navigate({ to: "/account" });
+						navigate({ to: "/profile" });
 					},
 					onError: (ctx) => {
 						if (ctx.error.code === "EMAIL_NOT_VERIFIED") {
@@ -191,7 +191,7 @@ export const LoginForm = () => {
 									<SocialAuthButtons
 										lastLoginMethod={lastLoginMethod}
 										disabled={isSubmitting}
-										callbackURL="/account"
+										callbackURL="/profile"
 										onAuthStart={() => setSocialAuthPending(true)}
 									/>
 									<FieldDescription className="text-center mt-4">

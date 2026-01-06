@@ -9,6 +9,7 @@ export const env = createEnv({
 		GOOGLE_SECRET: z.string().min(1),
 		QSTASH_TOKEN: z.string(),
 		RESEND_API_KEY: z.string(),
+		CLOUDINARY_API_KEY: z.string().min(1),
 	},
 
 	/**
@@ -20,7 +21,8 @@ export const env = createEnv({
 	client: {
 		VITE_GITHUB_CLIENT_ID: z.string().min(1),
 		VITE_GOOGLE_CLIENT_ID: z.string().min(1),
-		VITE_BETTER_AUTH_URL: z.string().min(1).optional(),
+		VITE_BETTER_AUTH_URL: z.string().min(1),
+		VITE_CLOUDINARY_CLOUD_NAME: z.string(),
 	},
 
 	/**

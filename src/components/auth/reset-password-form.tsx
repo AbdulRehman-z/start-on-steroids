@@ -1,10 +1,5 @@
 import { useForm } from "@tanstack/react-form";
-import {
-	Link,
-	useNavigate,
-	useParams,
-	useSearch,
-} from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";

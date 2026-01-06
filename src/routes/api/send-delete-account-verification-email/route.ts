@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { serve } from "@upstash/workflow/tanstack";
-import { resetPasswordTemplate } from "@/components/email-templates/reset-password";
+import { deleteAccountTemplate } from "@/components/email-templates/delete-account-email";
 import { sendEmail } from "@/lib/resend-client";
 
 type Input = {
@@ -11,17 +11,19 @@ type Input = {
 	url: string;
 };
 
-export const Route = createFileRoute("/api/send-password-reset-email")({
+export const Route = createFileRoute(
+	"/api/send-delete-account-verification-email",
+)({
 	server: {
 		handlers: serve<Input>(async (ctx) => {
 			const input = ctx.requestPayload;
 
-			await ctx.run("send-password-reset-email", async () => {
+			await ctx.run("send-delete-account-verification-email", async () => {
 				await sendEmail({
 					email: input.user.email,
-					subject: `Password Reset Request for ${input.user.name}`,
+					subject: `Delete Account Verification Email for ${input.user.name}`,
 					html: () =>
-						resetPasswordTemplate({ user: input.user, url: input.url }),
+						deleteAccountTemplate({ user: input.user, url: input.url }),
 				});
 			});
 		}),
