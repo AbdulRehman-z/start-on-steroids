@@ -26,12 +26,13 @@ import {
 } from "../ui/field";
 import { PasswordInput } from "../ui/password-input";
 import { EmailVerification } from "./email-verification";
+import { UsePassKeyButton } from "./passkey-button";
 import { SocialAuthButtons } from "./social-auth-buttons";
 
 export const LoginForm = () => {
 	const navigate = useNavigate();
 	const lastLoginMethod = authClient.getLastUsedLoginMethod();
-	const [socialAuthPending, setSocialAuthPending] = useState(false);
+	const [otherAuthsPending, setOtherAuthsPending] = useState(false);
 	const [showVerificationComponent, setShowVerificationComponent] =
 		useState(false);
 
@@ -72,7 +73,7 @@ export const LoginForm = () => {
 	});
 
 	// Combined loading state: form submitting OR social auth in progress
-	const isSubmitting = form.state.isSubmitting || socialAuthPending;
+	const isSubmitting = form.state.isSubmitting || otherAuthsPending;
 
 	return (
 		<FormWrapper>
@@ -110,12 +111,12 @@ export const LoginForm = () => {
 													id={field.name}
 													name={field.name}
 													type="email"
-													autoComplete="email"
 													value={field.state.value}
 													onBlur={field.handleBlur}
 													onChange={(e) => field.handleChange(e.target.value)}
 													aria-invalid={isInvalid}
 													placeholder="Enter your email"
+													autoComplete="email webauthn"
 												/>
 												{isInvalid && <FieldError errors={errors} />}
 											</Field>
@@ -155,7 +156,7 @@ export const LoginForm = () => {
 													onChange={(e) => field.handleChange(e.target.value)}
 													aria-invalid={isInvalid}
 													placeholder="********"
-													autoComplete="current-password"
+													autoComplete="current-password webauthn"
 												/>
 												{isInvalid && <FieldError errors={errors} />}
 											</Field>
@@ -196,7 +197,11 @@ export const LoginForm = () => {
 										lastLoginMethod={lastLoginMethod}
 										disabled={isSubmitting}
 										callbackURL="/profile"
-										onAuthStart={() => setSocialAuthPending(true)}
+										onAuthStart={() => setOtherAuthsPending(true)}
+									/>
+									<UsePassKeyButton
+										disabled={isSubmitting}
+										lastLoginMethod={lastLoginMethod}
 									/>
 									<FieldDescription className="text-center mt-4">
 										Don&apos;t have an account?{" "}

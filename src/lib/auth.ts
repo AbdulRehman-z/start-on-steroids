@@ -1,3 +1,4 @@
+import { passkey } from "@better-auth/passkey";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { lastLoginMethod, twoFactor } from "better-auth/plugins";
@@ -105,5 +106,5 @@ export const auth = betterAuth({
 	experimental: {
 		joins: true,
 	},
-	plugins: [tanstackStartCookies(), lastLoginMethod(), twoFactor()],
+	plugins: [tanstackStartCookies(), lastLoginMethod(), twoFactor(), passkey()],
 });

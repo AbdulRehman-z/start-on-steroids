@@ -57,6 +57,13 @@
       "when": 1767621092511,
       "tag": "0007_puzzling_slapstick",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1768050166725,
+      "tag": "0008_familiar_juggernaut",
+      "breakpoints": true
     }
   ]
 }

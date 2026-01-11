@@ -1,3 +1,4 @@
+import { passkeyClient } from "@better-auth/passkey/client";
 import {
 	lastLoginMethodClient,
 	twoFactorClient,
@@ -16,6 +17,7 @@ export const authClient = createAuthClient({
 		},
 	},
 	plugins: [
+		passkeyClient(),
 		lastLoginMethodClient(),
 		twoFactorClient({
 			onTwoFactorRedirect: () => {
