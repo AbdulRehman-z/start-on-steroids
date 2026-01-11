@@ -4,7 +4,6 @@ import {
 	CheckCircleIcon,
 	CopyCheckIcon,
 	CopyIcon,
-	Loader2,
 	Loader2Icon,
 } from "lucide-react";
 import { useState, useTransition } from "react";

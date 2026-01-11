@@ -28,3 +28,26 @@ export const menuItems = [
 		icon: TriangleAlertIcon,
 	},
 ];
+
+export type SupportedSocialProvider = "github" | "google";
+
+export type ProviderConfig = {
+	icon: string;
+	label: string;
+	description?: string;
+};
+
+export const PROVIDERS_CONFIG: Record<SupportedSocialProvider, ProviderConfig> =
+	{
+		google: {
+			label: "Google",
+			icon: "/google.svg",
+			description:
+				"Connect to your Google account for easy sign-in and email integration.",
+		},
+		github: {
+			label: "GitHub",
+			icon: "/github.svg",
+			description: "Connect to your GitHub account.",
+		},
+	};

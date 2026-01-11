@@ -1,48 +1,29 @@
-import type { LinkProps, RegisteredRouter } from "@tanstack/react-router";
 import { Image } from "@unpic/react";
 import { useState } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
+import {
+	PROVIDERS_CONFIG,
+	type SupportedSocialProvider,
+} from "@/lib/constants";
 import type { AllRoutes } from "@/lib/types";
 import { Badge } from "../ui/badge";
 import { Spinner } from "../ui/spinner";
 
-export type SupportedSocialProvider = "github" | "google";
-
 type SocialAuthButtonsProps = {
 	// Whether buttons should be disabled (e.g., during form submission)
-	disabled?: boolean;
+	disabled: boolean;
 	// URL to redirect to after OAuth completes - handled by Better Auth server
 	callbackURL?: AllRoutes;
 	// Called when social auth starts - use to disable other form elements
-	onAuthStart?: () => void;
+	onAuthStart: () => void;
 	lastLoginMethod?: ReturnType<typeof authClient.getLastUsedLoginMethod>;
 };
 
-export type ProviderConfig = {
-	icon: string;
-	label: string;
-	description?: string;
-};
-
-export const PROVIDERS_CONFIG: Record<SupportedSocialProvider, ProviderConfig> =
-	{
-		google: {
-			label: "Google",
-			icon: "/google.svg",
-			description:
-				"Connect to your Google account for easy sign-in and email integration.",
-		},
-		github: {
-			label: "GitHub",
-			icon: "/github.svg",
-			description: "Connect to your GitHub account.",
-		},
-	};
-
 export const SocialAuthButtons = ({
 	disabled = false,
-	callbackURL,
+	callbackURL = "/profile",
 	onAuthStart,
 	lastLoginMethod,
 }: SocialAuthButtonsProps) => {
@@ -50,19 +31,22 @@ export const SocialAuthButtons = ({
 		useState<SupportedSocialProvider | null>(null);
 
 	const handleSocialAuth = async (provider: SupportedSocialProvider) => {
-		// Set the current provider as loading
 		setLoadingProvider(provider);
-
 		// Notify parent to disable form elements
 		onAuthStart?.();
-
-		await authClient.signIn.social({
-			provider,
-			callbackURL,
-		});
-
-		// Note: No need to set loading to false here because the page will redirect
-		// But if auth fails, you might want to handle that with try-catch
+		await authClient.signIn.social(
+			{
+				provider,
+				callbackURL,
+			},
+			{
+				onError: (context) => {
+					toast.error(
+						context.error.message || "An error occurred while signing in.",
+					);
+				},
+			},
+		);
 	};
 
 	return (

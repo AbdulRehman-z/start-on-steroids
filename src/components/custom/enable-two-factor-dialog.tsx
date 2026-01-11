@@ -14,7 +14,7 @@ export const EnableTwoFactorDialog = ({ open, onOpenChange }: Props) => {
 			open={open}
 			onOpenChange={onOpenChange}
 		>
-			<EnableTwoFactorForm onSuccess={() => onOpenChange(false)} />
+			<EnableTwoFactorForm />
 		</ResponsiveDialog>
 	);
 };

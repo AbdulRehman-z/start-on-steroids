@@ -14,6 +14,7 @@ import { ChangeEmailDialog } from "../custom/change-email-dialog";
 import { ChangePasswordDialog } from "../custom/change-password-dialog";
 import { DisableTwoFactorDialog } from "../custom/disable-two-factor-dialog";
 import { EnableTwoFactorDialog } from "../custom/enable-two-factor-dialog";
+import { PasskeySheet } from "../custom/passkey-sheet";
 import { UpdateProfileDialog } from "../custom/update-profile-dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Badge } from "../ui/badge";
@@ -30,8 +31,10 @@ export const ProfileDetailsContainer = () => {
 	const [updateProfileOpen, onUpdateProfileOpenChange] = useState(false);
 	const [emailOpen, onEmailOpenChange] = useState(false);
 	const [passwordOpen, onPasswordOpenChange] = useState(false);
-	const [enable2FAOpen, setEnable2FAOpen] = useState(false);
-	const [disable2FAOpen, setDisable2FAOpen] = useState(false);
+	const [enable2FAOpen, onEnable2FAOpenChange] = useState(false);
+	const [disable2FAOpen, onDisable2FAOpenChange] = useState(false);
+	const [passkeyOpen, onPasskeyOpenChange] = useState(false);
+
 	const {
 		data: user,
 		error,
@@ -130,22 +133,34 @@ export const ProfileDetailsContainer = () => {
 									variant="outline"
 									onClick={() =>
 										user.twoFactorEnabled
-											? setDisable2FAOpen(true)
-											: setEnable2FAOpen(true)
+											? onDisable2FAOpenChange(true)
+											: onEnable2FAOpenChange(true)
 									}
 								>
 									<HammerIcon className="size-4" />
 									{user.twoFactorEnabled ? "Disable 2-FA" : "Enable 2-FA"}
 								</Button>
-
 								<EnableTwoFactorDialog
 									open={enable2FAOpen}
-									onOpenChange={setEnable2FAOpen}
+									onOpenChange={onEnable2FAOpenChange}
 								/>
 								<DisableTwoFactorDialog
 									open={disable2FAOpen}
-									onOpenChange={setDisable2FAOpen}
+									onOpenChange={onDisable2FAOpenChange}
 								/>
+
+								{/* PasskeySheet */}
+								<PasskeySheet
+									open={passkeyOpen}
+									onOpenChange={onPasskeyOpenChange}
+								/>
+								<Button
+									variant="outline"
+									onClick={() => onPasskeyOpenChange(true)}
+								>
+									<LockKeyhole className="size-4" />
+									Add Passkey
+								</Button>
 							</div>
 						</div>
 					</div>

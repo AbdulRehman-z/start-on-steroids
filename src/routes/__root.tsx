@@ -49,7 +49,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body>
-				<ThemeProvider defaultTheme="light" enableColorScheme enableSystem>
+				<ThemeProvider defaultTheme="dark" attribute="class" enableColorScheme enableSystem>
 					{children}
 				</ThemeProvider>
 				<Toaster />
