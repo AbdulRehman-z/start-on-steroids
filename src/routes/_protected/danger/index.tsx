@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { DangerZone } from "@/components/danger/danger-zone";
 
-export const Route = createFileRoute("/_protected/danger/")({
+export const Route = createFileRoute("/_protected/danger/index")({
 	// loader: async ({ context }) => {
 	// 	const { queryClient } = context;
 	// 	void queryClient.prefetchQuery({
@@ -40,5 +40,5 @@ function RouteComponent() {
 				</div>
 			</div>
 		</main>
-	);
+	)
 }

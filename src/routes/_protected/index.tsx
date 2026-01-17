@@ -1,14 +1,14 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { requireAuthMiddleware } from "@/lib/middlewares";
 
-export const Route = createFileRoute("/_protected/")({
+export const Route = createFileRoute("/_protected/index")({
 	server: {
 		middleware: [requireAuthMiddleware],
 	},
 	loader: async () => {
 		throw redirect({
 			to: "/profile",
-		});
+		})
 	},
 	component: RouteComponent,
 });

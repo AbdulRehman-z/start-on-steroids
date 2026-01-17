@@ -5,7 +5,7 @@ import { Testimonial } from "@/components/auth/testimonial";
 import { requireNoAuthMiddleware } from "@/lib/middlewares";
 import type { AllRoutes } from "@/lib/types";
 
-export const Route = createFileRoute("/_authLayout")({
+export const Route = createFileRoute("/_authLayout/route")({
 	server: {
 		middleware: [requireNoAuthMiddleware],
 	},
@@ -36,5 +36,5 @@ function RouteComponent() {
 			</div>
 			<Testimonial />
 		</div>
-	);
+	)
 }

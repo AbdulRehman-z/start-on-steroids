@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { LoginForm } from "@/components/auth/login-form";
 import { requireNoAuthMiddleware } from "@/lib/middlewares";
 
-export const Route = createFileRoute("/_authLayout/login/")({
+export const Route = createFileRoute("/_authLayout/login/index")({
 	server: {
 		middleware: [requireNoAuthMiddleware],
 	},

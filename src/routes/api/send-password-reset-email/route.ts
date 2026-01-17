@@ -7,11 +7,11 @@ type Input = {
 	user: {
 		email: string;
 		name: string;
-	};
+	}
 	url: string;
 };
 
-export const Route = createFileRoute("/api/send-password-reset-email")({
+export const Route = createFileRoute("/api/send-password-reset-email/route")({
 	server: {
 		handlers: serve<Input>(async (ctx) => {
 			const input = ctx.requestPayload;
@@ -22,8 +22,8 @@ export const Route = createFileRoute("/api/send-password-reset-email")({
 					subject: `Password Reset Request for ${input.user.name}`,
 					html: () =>
 						resetPasswordTemplate({ user: input.user, url: input.url }),
-				});
-			});
+				})
+			})
 		}),
 	},
 });

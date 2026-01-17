@@ -4,14 +4,14 @@ import { GenericLoader } from "@/components/custom/generic-loader";
 import { SessionsContainer } from "@/components/sessions/sessions-container";
 import { getUserSessionsFn } from "@/functions/get-user-sessions-fn";
 
-export const Route = createFileRoute("/_protected/sessions/")({
+export const Route = createFileRoute("/_protected/sessions/index")({
 	loader: async ({ context }) => {
 		const { queryClient } = context;
 		void queryClient.prefetchQuery({
 			staleTime: 1000 * 60 * 10,
 			queryKey: ["user-sessions"],
 			queryFn: getUserSessionsFn,
-		});
+		})
 	},
 	component: RouteComponent,
 });
@@ -42,5 +42,5 @@ function RouteComponent() {
 				</div>
 			</div>
 		</main>
-	);
+	)
 }

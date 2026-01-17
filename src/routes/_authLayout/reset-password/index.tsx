@@ -7,7 +7,7 @@ const searchParamsValidator = z.object({
 	token: z.string({ error: "token is missing!" }).min(1).readonly(),
 });
 
-export const Route = createFileRoute("/_authLayout/reset-password/")({
+export const Route = createFileRoute("/_authLayout/reset-password/index")({
 	validateSearch: searchParamsValidator,
 	errorComponent: () => <ResetPasswordError />,
 	component: RouteComponent,
