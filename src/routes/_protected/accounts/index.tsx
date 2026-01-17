@@ -4,13 +4,13 @@ import { AccountsManager } from "@/components/accounts/user-accounts-manager";
 import { GenericLoader } from "@/components/custom/generic-loader";
 import { getUserAccountsFn } from "@/functions/get-user-accounts-fn";
 
-export const Route = createFileRoute("/_protected/accounts/")({
+export const Route = createFileRoute("/_protected/accounts/index")({
 	loader: async ({ context }) => {
 		void context.queryClient.prefetchQuery({
 			staleTime: 1000 * 60 * 5, // means 5 minutes
 			queryKey: ["user-accounts"],
 			queryFn: getUserAccountsFn,
-		});
+		})
 	},
 	component: RouteComponent,
 });
@@ -41,5 +41,5 @@ function RouteComponent() {
 				</div>
 			</div>
 		</main>
-	);
+	)
 }

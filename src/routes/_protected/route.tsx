@@ -3,7 +3,7 @@ import { AppSidebar } from "@/components/custom/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { requireAuthMiddleware } from "@/lib/middlewares";
 
-export const Route = createFileRoute("/_protected")({
+export const Route = createFileRoute("/_protected/route")({
 	server: {
 		middleware: [requireAuthMiddleware],
 	},
@@ -17,5 +17,5 @@ function RouteComponent() {
 				<Outlet />
 			</SidebarInset>
 		</SidebarProvider>
-	);
+	)
 }

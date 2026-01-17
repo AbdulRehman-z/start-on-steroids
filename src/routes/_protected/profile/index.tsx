@@ -4,13 +4,13 @@ import { ProfileDetailsContainer } from "@/components/auth/profile-details";
 import { GenericLoader } from "@/components/custom/generic-loader";
 import { getUserDetailsFn } from "@/functions/get-user-details-fn";
 
-export const Route = createFileRoute("/_protected/profile/")({
+export const Route = createFileRoute("/_protected/profile/index")({
 	loader: async ({ context }) => {
 		void context.queryClient.prefetchQuery({
 			staleTime: 1000 * 60 * 5, // means 5 minutes
 			queryKey: ["user-details"],
 			queryFn: getUserDetailsFn,
-		});
+		})
 	},
 	component: RouteComponent,
 });
@@ -41,5 +41,5 @@ function RouteComponent() {
 				</div>
 			</div>
 		</main>
-	);
+	)
 }

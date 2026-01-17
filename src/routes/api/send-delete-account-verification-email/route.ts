@@ -7,12 +7,12 @@ type Input = {
 	user: {
 		email: string;
 		name: string;
-	};
+	}
 	url: string;
 };
 
 export const Route = createFileRoute(
-	"/api/send-delete-account-verification-email",
+	"/api/send-delete-account-verification-email/route",
 )({
 	server: {
 		handlers: serve<Input>(async (ctx) => {
@@ -24,8 +24,8 @@ export const Route = createFileRoute(
 					subject: `Delete Account Verification Email for ${input.user.name}`,
 					html: () =>
 						deleteAccountTemplate({ user: input.user, url: input.url }),
-				});
-			});
+				})
+			})
 		}),
 	},
 });

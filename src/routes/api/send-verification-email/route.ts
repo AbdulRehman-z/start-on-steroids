@@ -7,11 +7,11 @@ type Input = {
 	user: {
 		email: string;
 		name: string;
-	};
+	}
 	url: string;
 };
 
-export const Route = createFileRoute("/api/send-verification-email")({
+export const Route = createFileRoute("/api/send-verification-email/route")({
 	server: {
 		handlers: serve<Input>(async (ctx) => {
 			const input = ctx.requestPayload;
@@ -21,8 +21,8 @@ export const Route = createFileRoute("/api/send-verification-email")({
 					email: input.user.email,
 					subject: `Verify your email ${input.user.name}`,
 					html: () => verifyEmailTemplate({ user: input.user, url: input.url }),
-				});
-			});
+				})
+			})
 		}),
 	},
 });

@@ -7,12 +7,12 @@ type Input = {
 	user: {
 		email: string;
 		name: string;
-	};
+	}
 	newEmail: string;
 	url: string;
 };
 
-export const Route = createFileRoute("/api/send-email-change")({
+export const Route = createFileRoute("/api/send-email-change/route")({
 	server: {
 		handlers: serve<Input>(async (ctx) => {
 			const input = ctx.requestPayload;
@@ -27,8 +27,8 @@ export const Route = createFileRoute("/api/send-email-change")({
 							newEmail: input.newEmail,
 							url: input.url,
 						}),
-				});
-			});
+				})
+			})
 		}),
 	},
 });
